@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumbh Mela Packages | Trip Planner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+      :root {
+        --primary-color: #3498db;
+        --secondary-color: #2980b9;
+        --accent-color: #e74c3c;
+        --spiritual-color: #ff9800;
+        --light-bg: #f8f9fa;
+        --dark-text: #333;
+        --light-text: #fff;
+        --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+        --radius: 8px;
+      }
+      
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--light-bg);
+        color: var(--dark-text);
+        line-height: 1.6;
+      }
+
+      /* Header and Navigation */
+      header {
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        padding: 1rem 0;
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      
+      .nav-menu {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 0;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+      
+      .menu-button {
+        background: rgba(255, 255, 255, 0.2);
+        color: var(--light-text);
+        border: none;
+        padding: 12px 20px;
+        border-radius: var(--radius);
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      .menu-button:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+      }
+      
+      .menu-button.active {
+        background: var(--accent-color);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      
+      /* Hero Section */
+      .hero {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('./holiday_images/Prayagraj.jpg');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        text-align: center;
+        padding: 4rem 1rem;
+        margin-bottom: 2rem;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      }
+      
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto 1.5rem;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      }
+      
+      .hero-button {
+        background-color: var(--spiritual-color);
+        color: white;
+        padding: 12px 24px;
+        border: none;
+        border-radius: var(--radius);
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      
+      .hero-button:hover {
+        background-color: #e67e22;
+        transform: translateY(-2px);
+      }
+
+      /* Section Styling */
+      .section {
+        padding: 2rem 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .section-header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 10px;
+      }
+      
+      .section-header h2 {
+        font-size: 2rem;
+        color: var(--dark-text);
+      }
+      
+      .section-header p {
+        color: #666;
+        margin-top: 0.5rem;
+      }
+      
+      .section-header::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: var(--spiritual-color);
+        border-radius: 3px;
+      }
+
+      /* Package Cards */
+      .packages-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 25px;
+        padding: 15px 0;
+      }
+      
+      .package-card {
+        background: white;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+      
+      .package-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      }
+      
+      .package-image {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+      }
+      
+      .package-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+      
+      .package-card:hover .package-image img {
+        transform: scale(1.05);
+      }
+      
+      .badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: var(--spiritual-color);
+        color: white;
+        padding: 3px 8px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: bold;
+        z-index: 2;
+      }
+      
+      .package-details {
+        padding: 15px;
+      }
+      
+      .package-title {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--dark-text);
+      }
+      
+      .package-description {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+      }
+      
+      .package-features {
+        display: flex;
+        justify-content: space-between;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #eee;
+        margin-bottom: 15px;
+      }
+      
+      .feature {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 0.9rem;
+      }
+      
+      .feature i {
+        color: var(--spiritual-color);
+        margin-bottom: 5px;
+      }
+      
+      .price-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .price {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: var(--spiritual-color);
+      }
+      
+      .price-note {
+        font-size: 0.8rem;
+        color: #999;
+      }
+      
+      .book-button {
+        background-color: var(--spiritual-color);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: var(--radius);
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+      }
+      
+      .book-button:hover {
+        background-color: #e67e22;
+      }
+
+      /* Highlights Section */
+      .highlight-card {
+        background: white;
+        border-radius: var(--radius);
+        overflow: hidden;
+        padding: 20px;
+        box-shadow: var(--shadow);
+        margin-bottom: 20px;
+      }
+      
+      .highlight-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        gap: 10px;
+      }
+      
+      .highlight-title i {
+        color: var(--spiritual-color);
+        font-size: 1.5rem;
+      }
+      
+      .highlight-title h3 {
+        font-size: 1.3rem;
+        color: var(--dark-text);
+      }
+
+      /* FAQ Section */
+      .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      
+      .faq-item {
+        background: white;
+        border-radius: var(--radius);
+        margin-bottom: 15px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      
+      .faq-question {
+        padding: 15px 20px;
+        background: #f1f1f1;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .faq-answer {
+        padding: 15px 20px;
+        border-top: 1px solid #eee;
+      }
+
+      /* Responsive styling */
+      @media (max-width: 768px) {
+        .nav-menu {
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        .menu-button {
+          width: 90%;
+          justify-content: center;
+        }
+        
+        .hero h1 {
+          font-size: 2rem;
+        }
+        
+        .hero p {
+          font-size: 1rem;
+        }
+        
+        .packages-container {
+          grid-template-columns: 1fr;
+        }
+        
+        .section-header h2 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-menu">
+                <li>
+                    <button class="menu-button" onclick="location.href='./SearchPage.html'">
+                        <i class="fas fa-search"></i>Search
+                    </button>
+                </li>
+                <li>
+                    <button class="menu-button active" onclick="location.href='./KumbhMela.html'">
+                        <i class="fas fa-om"></i> Kumbh Mela Packages
+                    </button>
+                </li>
+                <li>
+                    <button class="menu-button" onclick="location.href='./holiday_sp3.html'">
+                        <i class="fas fa-tag"></i> Book@1
+                    </button>
+                </li>
+                <li>
+                    <button class="menu-button" onclick="location.href='./holiday_sp4.html'">
+                        <i class="fas fa-heart"></i> Honeymoon
+                    </button>
+                </li>
+                <li>
+                    <button class="menu-button" onclick="location.href='./holiday_sp5.html'">
+                        <i class="fas fa-plane"></i> Air India Express Holidays
+                    </button>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Kumbh Mela 2025 - Special Packages</h1>
+        <p>Experience the world's largest spiritual gathering with our carefully curated Kumbh Mela packages. Join millions of pilgrims for this once-in-a-lifetime sacred journey in Prayagraj.</p>
+        <button class="hero-button">Explore Packages</button>
+    </section>
+
+    <main>
+        <!-- Packages Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Kumbh Mela Packages</h2>
+                <p>Select from our range of spiritual journeys to the sacred Kumbh Mela</p>
+            </div>
+            <div class="packages-container">
+                <!-- Package 1 -->
+                <div class="package-card">
+                    <div class="package-image">
+                        <span class="badge">Most Popular</span>
+                        <img src="./holiday_images/Prayagraj.jpg" alt="Kumbh Mela Basic Package">
+                    </div>
+                    <div class="package-details">
+                        <h3 class="package-title">Kumbh Mela Essential Experience</h3>
+                        <p class="package-description">A 3-day spiritual journey to experience the essence of Kumbh Mela with comfortable accommodations and guided tours.</p>
+                        <div class="package-features">
+                            <div class="feature">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>3 Days</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <span>Standard Tent</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-utensils"></i>
+                                <span>All Meals</span>
+                            </div>
+                        </div>
+                        <div class="price-row">
+                            <div>
+                                <div class="price">₹12,999</div>
+                                <div class="price-note">per person</div>
+                            </div>
+                            <button class="book-button">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 2 -->
+                <div class="package-card">
+                    <div class="package-image">
+                        <span class="badge">Premium</span>
+                        <img src="./holiday_images/Prayagraj.jpg" alt="Kumbh Mela Deluxe Package">
+                    </div>
+                    <div class="package-details">
+                        <h3 class="package-title">Kumbh Mela Premium Retreat</h3>
+                        <p class="package-description">A 5-day premium experience with luxury tent accommodations, private guides, and exclusive access to rituals.</p>
+                        <div class="package-features">
+                            <div class="feature">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>5 Days</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <span>Luxury Tent</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-utensils"></i>
+                                <span>All Meals</span>
+                            </div>
+                        </div>
+                        <div class="price-row">
+                            <div>
+                                <div class="price">₹24,999</div>
+                                <div class="price-note">per person</div>
+                            </div>
+                            <button class="book-button">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="package-card">
+                    <div class="package-image">
+                        <span class="badge">Family</span>
+                        <img src="./holiday_images/Prayagraj.jpg" alt="Kumbh Mela Family Package">
+                    </div>
+                    <div class="package-details">
+                        <h3 class="package-title">Kumbh Mela Family Package</h3>
+                        <p class="package-description">A 4-day family-friendly package with spacious accommodations and activities suitable for all age groups.</p>
+                        <div class="package-features">
+                            <div class="feature">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>4 Days</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <span>Family Tent</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-utensils"></i>
+                                <span>All Meals</span>
+                            </div>
+                        </div>
+                        <div class="price-row">
+                            <div>
+                                <div class="price">₹39,999</div>
+                                <div class="price-note">for family of 4</div>
+                            </div>
+                            <button class="book-button">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 4 -->
+                <div class="package-card">
+                    <div class="package-image">
+                        <span class="badge">Budget</span>
+                        <img src="./holiday_images/Prayagraj.jpg" alt="Kumbh Mela Day Tour">
+                    </div>
+                    <div class="package-details">
+                        <h3 class="package-title">Kumbh Mela Day Tour</h3>
+                        <p class="package-description">A full day guided tour of Kumbh Mela with transportation from Varanasi or Prayagraj city center.</p>
+                        <div class="package-features">
+                            <div class="feature">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>1 Day</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bus"></i>
+                                <span>Transport</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-utensils"></i>
+                                <span>Lunch</span>
+                            </div>
+                        </div>
+                        <div class="price-row">
+                            <div>
+                                <div class="price">₹4,999</div>
+                                <div class="price-note">per person</div>
+                            </div>
+                            <button class="book-button">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 5 -->
+                <div class="package-card">
+                    <div class="package-image">
+                        <span class="badge">Special</span>
+                        <img src="./holiday_images/Prayagraj.jpg" alt="Kumbh Mela Special Bathing Days">
+                    </div>
+                    <div class="package-details">
+                        <h3 class="package-title">Royal Bath (Shahi Snan) Special</h3>
+                        <p class="package-description">Experience the most auspicious bathing days with special arrangements and guided spiritual activities.</p>
+                        <div class="package-features">
+                            <div class="feature">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>3 Days</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <span>Deluxe Tent</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-utensils"></i>
+                                <span>All Meals</span>
+                            </div>
+                        </div>
+                        <div class="price-row">
+                            <div>
+                                <div class="price">₹19,999</div>
+                                <div class="price-note">per person</div>
+                            </div>
+                            <button class="book-button">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Package 6 -->
+                <div class="package-card">
+                    <div class="package-image">
+                        <span class="badge">Luxury</span>
+                        <img src="./holiday_images/Prayagraj.jpg" alt="Kumbh Mela VIP Package">
+                    </div>
+                    <div class="package-details">
+                        <h3 class="package-title">Kumbh Mela Ultimate VIP Experience</h3>
+                        <p class="package-description">A 7-day luxury experience with premium accommodations, private ceremonies, and helicopter tours of the Kumbh Mela.</p>
+                        <div class="package-features">
+                            <div class="feature">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span>7 Days</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bed"></i>
+                                <span>VIP Suite</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-utensils"></i>
+                                <span>Gourmet Meals</span>
+                            </div>
+                        </div>
+                        <div class="price-row">
+                            <div>
+                                <div class="price">₹99,999</div>
+                                <div class="price-note">per person</div>
+                            </div>
+                            <button class="book-button">Book Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Highlights Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Kumbh Mela Highlights</h2>
+                <p>What makes our Kumbh Mela packages special</p>
+            </div>
+            
+            <div class="highlight-card">
+                <div class="highlight-title">
+                    <i class="fas fa-om"></i>
+                    <h3>Spiritual Significance</h3>
+                </div>
+                <p>The Kumbh Mela is considered one of the most sacred pilgrimages in Hinduism. According to Hindu mythology, drops of the nectar of immortality (amrit) fell at four places where the Kumbh Mela is held: Prayagraj, Haridwar, Ujjain, and Nashik. Our packages include guidance on the spiritual significance and mythology behind this grand event.</p>
+            </div>
+            
+            <div class="highlight-card">
+                <div class="highlight-title">
+                    <i class="fas fa-water"></i>
+                    <h3>Royal Bathing (Shahi Snan)</h3>
+                </div>
+                <p>Experience the most auspicious bathing days when millions gather to take a dip in the sacred waters at the confluence of the Ganges, Yamuna, and mythical Saraswati rivers. Our packages are timed to coincide with these special occasions, with dedicated viewing areas and guidance.</p>
+            </div>
+            
+            <div class="highlight-card">
+                <div class="highlight-title">
+                    <i class="fas fa-users"></i>
+                    <h3>Sadhu Darshan</h3>
+                </div>
+                <p>Meet the holy men and women of India who gather at the Kumbh Mela. Many sadhus belong to ancient akharas (Hindu monastic orders) and only appear in public during the Kumbh. Our guides will help you navigate these interactions with respect and understanding.</p>
+            </div>
+            
+            <div class="highlight-card">
+                <div class="highlight-title">
+                    <i class="fas fa-home"></i>
+                    <h3>Comfortable Accommodations</h3>
+                </div>
+                <p>Stay in well-appointed tents or luxury accommodations based on your package selection. All our accommodations include clean bathrooms, comfortable bedding, electricity, and security to ensure your stay is comfortable despite the massive gathering.</p>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Common questions about our Kumbh Mela packages</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        When is the next Kumbh Mela in Prayagraj?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        The next Kumbh Mela in Prayagraj (Allahabad) is scheduled for 2025. The exact dates will be determined based on astrological calculations and will be announced closer to the event.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is included in the packages?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Our packages typically include accommodation, meals, guided tours of the Kumbh Mela grounds, attendance at key ceremonies, transportation from designated pickup points, and assistance from experienced guides throughout your stay. Specific inclusions vary by package.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How crowded will it be during Kumbh Mela?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        The Kumbh Mela is the world's largest gathering of people. Millions of pilgrims attend, especially on the main bathing days. Our packages are designed to provide comfortable experiences despite the crowds, with strategic accommodations and guided navigation through the festival.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is the Kumbh Mela suitable for foreign tourists?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, the Kumbh Mela welcomes visitors from all over the world. Our packages include English-speaking guides familiar with addressing the needs and questions of international visitors. We provide cultural context and ensure you have a respectful and enriching experience.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What should I pack for Kumbh Mela?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We recommend packing modest clothing (shoulders and knees covered), comfortable walking shoes, a hat, sunscreen, insect repellent, any required medications, a water bottle, and a small bag for daily excursions. A detailed packing list will be provided upon booking.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background-color: #333; color: white; text-align: center; padding: 20px; margin-top: 20px;">
+        <p>© 2025 Holiday Trip Planner. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Simple script to toggle FAQ answers
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
+                
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    icon.classList.remove('fa-chevron-up');
+                    icon.classList.add('fa-chevron-down');
+                } else {
+                    answer.style.display = 'block';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
